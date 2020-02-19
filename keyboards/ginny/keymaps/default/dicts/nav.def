@@ -1,0 +1,18 @@
+
+//Nav defs
+PRES(NAV | AB,											KC_LSFT)
+PRES(NAV | AK,											KC_SPC)
+PRES(NAV | AN,											KC_LEFT)
+PRES(NAV | AE,											KC_DOWN)
+PRES(NAV | AI,											KC_UP)
+PRES(NAV | AO,											KC_RGHT)
+#ifdef MOUSEKEY_ENABLE
+	PRES(NAV | AA,											KC_MS_L)
+	PRES(NAV | AR,											KC_MS_D)
+	PRES(NAV | AS,											KC_MS_U)
+	PRES(NAV | AT,											KC_MS_R)
+	PRES(NAV | AA | AR,									KC_BTN1)
+	PRES(NAV | AR | AS,									KC_BTN3)
+	PRES(NAV | AS | AT,									KC_BTN2)
+	PRES(NAV | AA | AS,									KC_WH_D)
+	PRES(NAV

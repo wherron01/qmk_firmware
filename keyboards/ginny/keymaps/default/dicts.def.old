@@ -1,5 +1,0 @@
-#include "dicts/hiitsme/base.def"
-#include "dicts/hiitsme/nums.def"
-#include "dicts/hiitsme/function.def"
-#include "dicts/hiitsme/layer.def"
-#include "dicts/hiitsme/nav.def"

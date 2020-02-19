@@ -1,0 +1,9 @@
+
+
+// Layer Switches
+SPEC( AA | AT | AN | AO,							SPEC_STICKY,	NUM)
+SPEC( AR | AS | AE | AI,							SPEC_STICKY,	NAV)
+SPEC( AA | AR | AS | AT | AN | AE | AI | AO,		SPEC_STICKY, 	FUN)
+SPEC(NUM | AA | AT | AN | AO,  						SPEC_STICKY,	0)
+SPEC(NAV | AR | AS | AE | AI,						SPEC_STICKY,	0)
+SPEC(FUN | AA | AR | AS | AT | AN | AE | AI | AO,	SPEC_STICKY,	0)
