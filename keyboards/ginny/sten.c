@@ -17,19 +17,19 @@ bool	 		repeatFlag		= false;	// Should we repeat?
 C_SIZE		pChord				= 0;			// Previous Chord
 C_SIZE		stickyBits 		= 0;			// Or'd with every incoming press
 int		 		pChordIndex		= 0;			// Keys in previousachord
-C_SIZE		pChordState[32];				// Previous chord sate 
+C_SIZE		pChordState[32];				// Previous chord sate
 
 // Key Dicts
 extern const struct keyEntry		keyDict[];
 extern size_t keyLen;
 extern const struct comboEntry	cmbDict[];
-extern size_t comboLen; 
+extern size_t comboLen;
 extern const struct funcEntry 	funDict[];
 extern size_t funcsLen;
 extern const struct stringEntry	strDict[];
-extern size_t stringLen; 
+extern size_t stringLen;
 extern const struct specialEntry spcDict[];
-extern size_t specialLen; 
+extern size_t specialLen;
 
 // Mode state
 enum MODE { STENO = 0, QWERTY, COMMAND };
@@ -54,7 +54,7 @@ int8_t	mousePress;
 
 
 // All processing done at chordUp goes through here
-void processKeysUp() { 
+void processKeysUp() {
 	// Check for mousekeys, this is release
 #ifdef MOUSEKEY_ENABLE
 	if (inMouse) {
@@ -95,8 +95,8 @@ void processKeysUp() {
 		chordState[i] = 0xFFFF;
 }
 
-// Update Chord State 
-bool process_record_kb(uint16_t keycode, keyrecord_t *record) { 
+// Update Chord State
+bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 	// Everything happens in here when steno keys come in.
 	// Bail on keyup
 	bool pr = record->event.pressed;
@@ -125,14 +125,14 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
 	// Store previous state for fastQWER
 	if (pr) {
-		chordState[chordIndex] = cChord; 
+		chordState[chordIndex] = cChord;
 		chordIndex++;
 	}
 
 #ifndef NO_DEBUG
 	uprintf("Chord: %u\n", cChord);
 #endif
-	return false; 
+	return false;
 }
 void matrix_scan_user(void) {
 	// We abuse this for early sending of key
@@ -192,7 +192,7 @@ C_SIZE mapKeys(bool lookup) {
 			if (!lookup) {
 				uint8_t comboKeys[COMBO_MAX];
 				memcpy_P(&comboKeys, fromPgm.keys, sizeof(uint8_t)*COMBO_MAX);
-				for (int j = 0; j < COMBO_MAX; j++) 
+				for (int j = 0; j < COMBO_MAX; j++)
 #ifndef NO_DEBUG
 					uprintf("Combo [%u]: %u\n", j, comboKeys[j]);
 #endif
@@ -281,7 +281,7 @@ void processChord(void) {
 	uprintf("made it past the maw");
 #endif
 
-	// Iterate through chord picking out the individual 
+	// Iterate through chord picking out the individual
 	// and longest chords
 	C_SIZE bufChords[QWERBUF];
 	int		 bufLen		= 0;
@@ -303,7 +303,7 @@ void processChord(void) {
 				longestChord = test;
 			}
 		}
-		
+
 		mask |= longestChord;
 		bufChords[bufLen] = longestChord;
 		bufLen++;
@@ -316,7 +316,7 @@ void processChord(void) {
 			return;
 		}
 	}
-	
+
 	// Now that the buffer is populated, we run it
 	for (int i = 0; i < bufLen ; i++) {
 		cChord = bufChords[i];
@@ -327,7 +327,7 @@ void processChord(void) {
 	}
 
 	// Save state in case of repeat
-	if (!repeatFlag) {			
+	if (!repeatFlag) {
 		saveState(savedChord);
 	}
 
@@ -338,13 +338,13 @@ void processChord(void) {
 void saveState(C_SIZE cleanChord) {
 	pChord = cleanChord;
 	pChordIndex = chordIndex;
-	for (int i = 0; i < 32; i++) 
+	for (int i = 0; i < 32; i++)
 		pChordState[i] = chordState[i];
 }
 void restoreState() {
 	cChord = pChord;
 	chordIndex = pChordIndex;
-	for (int i = 0; i < 32; i++) 
+	for (int i = 0; i < 32; i++)
 		chordState[i] = pChordState[i];
 }
 
@@ -357,7 +357,7 @@ void SEND(uint8_t kc) {
 #endif
 		CMDBUF[CMDLEN] = kc;
 		CMDLEN++;
-	} 
+	}
 
 	if (cMode != COMMAND) register_code(kc);
 	return;
@@ -385,7 +385,7 @@ void CLICK_MOUSE(uint8_t kc) {
 }
 void SWITCH_LAYER(int layer) {
 #ifndef NO_ACTION_LAYER
-	if (keymapsCount >= layer) 
+	if (keymapsCount >= layer)
 		layer_on(layer);
 #endif
 }

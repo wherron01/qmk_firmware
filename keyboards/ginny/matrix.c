@@ -1,17 +1,13 @@
 /*
-
 Copyright 2013 Oleg Kostyuk <cub.uanic@gmail.com>
-
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 (at your option) any later version.
-
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -156,17 +152,17 @@ uint8_t matrix_scan(void) {
     for (uint8_t i = 0; i < MATRIX_I2C; i++) {
         // select rows from left and right hands
         uint8_t i2c_index = i;
-        uint8_t main_index = i + MATRIX_I2C; 
+        uint8_t main_index = i + MATRIX_I2C;
         select_row(i2c_index);
 
-        if (i < MATRIX_MAIN) 
+        if (i < MATRIX_MAIN)
 						select_row(main_index);
 
         // we don't need a 30us delay anymore, because selecting a
         // left-hand row requires more than 30us for i2c.
 
         changed |= store_raw_matrix_row(i2c_index);
-        if (i < MATRIX_MAIN) 
+        if (i < MATRIX_MAIN)
         	changed |= store_raw_matrix_row(main_index);
 
         unselect_rows();
